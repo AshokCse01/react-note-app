@@ -1,31 +1,33 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 export const SideBar = () => {
+
+    const getStyle = ({ isActive }) => {
+        return isActive ? 'bg-indigo-800 flex align-center px-2 py-1 gap-2 rounded-tr-full rounded-br-full  ' : ' hover:bg-indigo-800 flex align-center hover:text-slate-200 gap-2 p-2 px-1 rounded-tr-full rounded-br-full '
+    }
     return (
-        <aside className='flex flex-col border-r-2 border-gray-400 w-45 h-screen'>
-            <Link to='/home'>
-                <span class="material-symbols-outlined">
-                    home
-                </span>
+        <aside className='flex flex-col px-2 py-1 border-r-2 border-gray-500 w-45 h-screen '>
+            <NavLink className={getStyle} to='/home'>
+                <span className="material-symbols-outlined">home</span>
                 <span>Home</span>
-            </Link>
-            <Link to='/archive' >
-                <span class="material-symbols-outlined">
+            </NavLink>
+            <NavLink className={getStyle} to='/archive' >
+                <span className="material-symbols-outlined">
                     archive
                 </span>
                 <span>Archine</span>
-            </Link>
-            <Link to='/important' >
+            </NavLink>
+            <NavLink className={getStyle} to='/important' >
                 <span class="material-symbols-outlined">
-                    priority_high
+                    label_important
                 </span>
-                <span>Important</span></Link>
-            <Link to='/bin' >
-                <span class="material-symbols-outlined">
+                <span>Important</span></NavLink>
+            <NavLink className={getStyle} to='/bin' >
+                <span className="material-symbols-outlined">
                     delete
                 </span>
-                <span>Bin</span></Link>
+                <span>Bin</span></NavLink>
         </aside>
     )
 }
