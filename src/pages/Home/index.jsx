@@ -38,8 +38,8 @@ export const Home = () => {
             <Navbar />
             <main className="flex gap-3">
                 <SideBar />
-                <div>
-                    <div className="flex flex-col w-[300px]  border-slate-800 relative ">
+                <div className=" flex flex-col w-screen">
+                    <div className="flex flex-col w-[300px]  border-slate-800 relative self-center">
 
                         <input value={title} onChange={onTitleChange} className="border" placeholder="Enter Title"
                             className=" border border-natural-800 rounded-t-md focus:outline-none border-b-0 p-1" />
@@ -49,35 +49,34 @@ export const Home = () => {
                         </button>
                     </div>
 
+                    <div className="mt-14">
 
-
-                    {
-                        pinnedNotes?.length > 0 && (
-                            <>
-                                <h3>Pinned Notes</h3>
-                            <div className="flex flex-wrap mt-14 gap-6">
-                                {
-                                    pinnedNotes?.length > 0 && pinnedNotes.map(({ id, title, text, isPinned }) => (
-                                        <NotesCard key={id} id={id} text={text} title={title} isPinned={isPinned} />
-                                    ))
-                                }
-                            </div>
-                            </>
-                        )
-                    }
-
-                    
-                    <div className="flex flex-wrap mt-14 gap-6">
                         {
-                            pinnedNotes?.length > 0 && <h3>other Notes </h3>
+                            pinnedNotes?.length > 0 && (
+                                <>
+                                    <h3 className="m-2 text-xl font-semibold">Pinned Notes</h3>
+                                    <div className="flex flex-wrap gap-6">
+                                        {
+                                            pinnedNotes?.length > 0 && pinnedNotes.map(({ id, title, text, isPinned }) => (
+                                                <NotesCard key={id} id={id} text={text} title={title} isPinned={isPinned} />
+                                            ))
+                                        }
+                                    </div>
+                                </>
+                            )
                         }
+
                         {
-                            otherNotes?.length > 0 && otherNotes.map(({ id, title, text, isPinned }) => (
-                                <NotesCard key={id} id={id} text={text} title={title} isPinned={isPinned} />
-                            ))
+                            pinnedNotes?.length > 0 && <h3 className="m-2 mt-2 text-xl font-semibold">Other Notes </h3>
                         }
+                        <div className="flex flex-wrap  gap-6">
+                            {
+                                otherNotes?.length > 0 && otherNotes.map(({ id, title, text, isPinned }) => (
+                                    <NotesCard key={id} id={id} text={text} title={title} isPinned={isPinned} />
+                                ))
+                            }
+                        </div>
                     </div>
-
 
                 </div>
 
