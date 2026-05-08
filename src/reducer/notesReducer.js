@@ -33,6 +33,12 @@ export const NotesReducer = (state, { type, payload }) => {
                 ...state,
                 notes: state.notes.map(note => note.id === payload.id ? { ...note, isPinned: !note.isPinned } : note)
             }
+        case 'ARCHIVE':
+            return {
+                ...state,
+                archive: [...state.archive, state.notes.find(({ id }) => id === payload.id)],
+                notes:state.notes.filter(({id})=>id !==payload.id)
+            }
         default:
             return state
     }

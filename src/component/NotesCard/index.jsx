@@ -1,24 +1,35 @@
 import { useNotes } from "../../context/note-context"
+import { findNotesInArchive } from "../../utils/findNotesInArchive";
 
 
 export const NotesCard = ({ id, text, title, isPinned }) => {
 
-    const { notesDispatch } = useNotes();
+    const { notesDispatch, archive } = useNotes();
     const onPinClick = (id) => {
         !isPinned ? notesDispatch({
             type: 'PIN',
             payload: { id }
-        }):notesDispatch({
-            type:'UNPIN',
-            payload:{ id }
+        }) : notesDispatch({
+            type: 'UNPIN',
+            payload: { id }
         })
     }
+
+    const onArchiveClick = (id) => {
+        notesDispatch({
+            type: 'ARCHIVE',
+            payload: { id }
+        })
+    }
+
+    const isNoteInArchive = findNotesInArchive(archive, id);
+
     return (
-        <div className="w-56 border border-natural-800 p-2  rounded-md " key={id}>
+        <div className="w-60 border border-natural-800 p-2  rounded-md " key={id}>
             <div className="flex justify-between border-b-1 border-slate-700" >
                 <p>{title}</p>
                 <button onClick={() => onPinClick(id)}>
-                    <span className={isPinned?"material-icons" : "material-icons-outlined"}>
+                    <span className={isPinned ? "material-icons" : "material-icons-outlined"}>
                         push_pin
                     </span>
                 </button>
@@ -27,7 +38,7 @@ export const NotesCard = ({ id, text, title, isPinned }) => {
                 <p>{text}</p>
                 <div className="ml-auto">
 
-                    <button><span className="material-icons-outlined">
+                    <button onClick={() => onArchiveClick(id)}><span className={isNoteInArchive ? "material-icons" : "material-icons-outlined"}>
                         archive
                     </span></button>
                     <button>

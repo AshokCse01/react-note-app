@@ -5,7 +5,7 @@ import { NotesCard } from "../../component/NotesCard"
 import { useNotes } from "../../context/note-context"
 
 export const Home = () => {
-    const { notes, title, text, notesDispatch } = useNotes();
+    const { notes, title, text, notesDispatch, archive } = useNotes();
 
     const onTitleChange = (e) => {
         notesDispatch({
@@ -28,7 +28,7 @@ export const Home = () => {
             type: 'CLEAR_INPUT'
         })
     }
-
+    console.log(archive)
 
     const pinnedNotes = notes?.length > 0 && notes.filter(({ isPinned }) => isPinned)
     const otherNotes = notes?.length > 0 && notes.filter(({ isPinned }) => !isPinned)
@@ -41,7 +41,7 @@ export const Home = () => {
                 <div className=" flex flex-col w-screen">
                     <div className="flex flex-col w-[300px]  border-slate-800 relative self-center">
 
-                        <input value={title} onChange={onTitleChange} className="border" placeholder="Enter Title"
+                        <input value={title} onChange={onTitleChange} placeholder="Enter Title"
                             className=" border border-natural-800 rounded-t-md focus:outline-none border-b-0 p-1" />
                         <textarea value={text} onChange={onTextChange} className="border border-natural-800 rounded-b-md focus:outline-none border-t-0 p-1" placeholder="Enter Text" />
                         <button disabled={title.length === 0} onClick={onAddClick} className=" w-7 h-7  bg-indigo-800 text-slate-50 rounded-full absolute bottom-0 right-0">
